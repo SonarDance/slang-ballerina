@@ -1,0 +1,22 @@
+plugins {
+    // Plugins to be added here later
+}
+
+dependencies {
+    // SLang related dependencies
+    implementation project(':slang-api')
+    implementation project(':slang-checks')
+    implementation project(':slang-plugin')
+
+    // SonarQube Connecting API Plugins
+    compileOnly 'org.sonarsource.api.plugin:sonar-plugin-api'
+    implementation 'org.sonarsource.analyzer-commons:sonar-analyzer-commons'
+
+    // Source Code to JSON Converting Plugin
+    implementation 'com.eclipsesource.minimal-json:minimal-json'
+
+    // CheckStyle Plugin
+    implementation project(':checkstyle-import')
+
+    // Ballerina Related Plugins
+}

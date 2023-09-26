@@ -7,21 +7,29 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'slang'
+rootProject.name = 'slang-ballerina'
 
+// SLang projects with dependencies required to provide third-party languages with static code analysis support
 include 'slang-api'
 include 'slang-testing'
 include 'slang-antlr'
 include 'slang-checks'
 include 'slang-plugin'
-include 'sonar-ruby-plugin'
-include 'sonar-scala-plugin'
-include 'sonar-go-to-slang'
-include 'sonar-go-plugin'
+
+// Include Ballerina Lang Project that depends on SLang support
+include 'sonar-ballerina-plugin'
+
+// Error Prone Projects to be excluded from getting built by gradle
+//include 'sonar-go-to-slang'
+//include 'sonar-go-plugin'
+//include 'sonar-ruby-plugin'
+//include 'jruby-repackaged'
+//include 'sonar-scala-plugin'
+
+// Other Projects which SLang is dependent on
 include 'checkstyle-import'
 include 'its:plugin'
 include 'its:ruling'
-include 'jruby-repackaged'
 
 // "extraSettings.gradle" should not be renamed "settings.gradle" to not create a wrong project rootDir
 File extraSettings = new File(rootDir, 'private/extraSettings.gradle')

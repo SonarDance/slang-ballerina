@@ -1,3 +1,8 @@
+# SonarQube Ballerina Plugin (SLang)
+
+This Plugin provides ballerina static code analysis support for SonarQube.
+More Information to be updated...
+
 # SLang
 
 [![Build Status](https://travis-ci.org/SonarSource/slang.svg?branch=master)](https://travis-ci.org/SonarSource/slang)
