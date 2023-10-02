@@ -25,6 +25,7 @@ import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.BuiltInActi
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+// This is a direct test done against the plugin implementation, and cannot be deactivated like the SLang tests
 class ScalaProfileDefinitionTest {
 
   @Test

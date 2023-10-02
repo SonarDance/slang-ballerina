@@ -25,7 +25,7 @@ import org.wso2.ballerina.plugin.ScalaPlugin;
 
 public class ScapegoatRulesDefinition extends ScalastyleFamilyRulesDefinition {
 
-  private static final String RULES_JSON = "org/sonar/l10n/scala/rules/scapegoat/rules.json";
+  private static final String RULES_JSON = "org/sonar/l10n/ballerina/rules/scapegoat/rules.json";
 
   static final ExternalRuleLoader RULE_LOADER = new ExternalRuleLoader(
     ScapegoatSensor.LINTER_KEY, ScapegoatSensor.LINTER_NAME, RULES_JSON, ScalaPlugin.SCALA_LANGUAGE_KEY);

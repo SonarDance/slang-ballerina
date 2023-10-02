@@ -24,7 +24,7 @@ import org.sonarsource.analyzer.commons.BuiltInQualityProfileJsonLoader;
 
 public class ScalaProfileDefinition implements BuiltInQualityProfilesDefinition {
 
-  static final String PATH_TO_JSON = "org/sonar/l10n/scala/rules/scala/Sonar_way_profile.json";
+  static final String PATH_TO_JSON = "org/sonar/l10n/ballerina/rules/ballerina/Sonar_way_profile.json";
 
   @Override
   public void define(BuiltInQualityProfilesDefinition.Context context) {

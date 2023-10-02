@@ -31,7 +31,7 @@ import org.sonarsource.slang.plugin.RulesDefinitionUtils;
 
 public class ScalaRulesDefinition implements RulesDefinition {
 
-  private static final String RESOURCE_FOLDER = "org/sonar/l10n/scala/rules/scala";
+  private static final String RESOURCE_FOLDER = "org/sonar/l10n/ballerina/rules/ballerina";
 
   private final SonarRuntime runtime;
 

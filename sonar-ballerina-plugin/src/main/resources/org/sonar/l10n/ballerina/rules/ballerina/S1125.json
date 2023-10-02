@@ -1,11 +1,11 @@
 {
-  "title": "Unused variables",
+  "title": "Boolean literals should not be redundant",
   "type": "CODE_SMELL",
   "code": {
     "impacts": {
       "MAINTAINABILITY": "LOW"
     },
-    "attribute": "IDENTIFIABLE"
+    "attribute": "CONVENTIONAL"
   },
   "status": "ready",
   "remediation": {
@@ -13,11 +13,11 @@
     "constantCost": "5min"
   },
   "tags": [
-    "convention"
+    "clumsy"
   ],
   "defaultSeverity": "Minor",
-  "ruleSpecification": "RFC 3629",
-  "sqKey": "S100",
+  "ruleSpecification": "RSPEC-1125",
+  "sqKey": "S1125",
   "scope": "All",
   "quickfix": "unknown"
 }

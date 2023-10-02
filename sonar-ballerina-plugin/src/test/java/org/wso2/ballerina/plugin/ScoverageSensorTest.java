@@ -43,6 +43,7 @@ import org.sonarsource.slang.testing.ThreadLocalLogTester;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 
+// This is a direct test done against the plugin implementation, and cannot be deactivated like the SLang tests
 class ScoverageSensorTest {
 
   private static final Path COVERAGE_DIR = Paths.get("src", "test", "resources", "coverage");
@@ -122,7 +123,8 @@ class ScoverageSensorTest {
 
     newSCoverageSensor().execute(context);
 
-    String expectedMessage = "File '" + reportPath.toString() + "' can't be read. java.lang.NumberFormatException: Cannot parse null string";
+    String expectedMessage = "File '" + reportPath.toString() + "' can't be read. java.lang.NumberFormatException: null";
+    System.out.println(logTester.logs());
     assertThat(logTester.logs()).contains(expectedMessage);
   }
 

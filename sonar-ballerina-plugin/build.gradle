@@ -61,6 +61,10 @@ dependencies {
     // Ballerina related dependencies
 }
 
+// Required tasks to interlink the scala AST to SLang AST converters
+tasks.compileScala.classpath = sourceSets.main.compileClasspath
+tasks.compileJava.classpath += files(sourceSets.main.scala.classesDirectory)
+
 // Configurations for the output jar file when the gradle build is performed
 jar {
     manifest {

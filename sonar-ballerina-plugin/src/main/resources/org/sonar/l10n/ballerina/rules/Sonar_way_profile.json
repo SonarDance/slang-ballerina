@@ -1,7 +1,0 @@
-{
-  "name": "Sonar way",
-  "ruleKeys": [
-    "S100",
-    "S101"
-  ]
-}
