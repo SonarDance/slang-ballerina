@@ -1,22 +1,91 @@
 plugins {
-    // Plugins to be added here later
+    // Required plugin for scala projects
+    id "scala"
+
+    // Ballerina dependent plugins to be included here
+}
+
+// Required to be defined since it's used on scala projects
+sourceSets {
+    main {
+        scala {
+            // scala output will be a dependency used by java code
+            outputDir = file("$buildDir/classes/scala/main")
+        }
+        java {
+            outputDir = file("$buildDir/classes/java/main")
+        }
+    }
+}
+
+sonarqube {
+    properties {
+        // Property to include trigger SonarQube plugin scans
+        property 'sonar.sources', 'src/main/scala'
+    }
 }
 
 dependencies {
+    // Required SonarQube connecting API dependencies
+    compileOnly 'org.sonarsource.api.plugin:sonar-plugin-api'
+    implementation 'org.sonarsource.analyzer-commons:sonar-analyzer-commons'
+
+    // Required dependency for sonarqube external reports
+    implementation 'org.sonarsource.analyzer-commons:sonar-xml-parsing'
+
+    // Required dependencies for the scala AST to SLang converter
+    implementation('org.scalameta:scalameta_2.12:4.6.0') {
+        exclude group: 'org.scalameta', module: 'semanticdb_2.12'
+        exclude group: 'com.lihaoyi', module: 'fansi_2.12'
+        exclude group: 'com.google.protobuf', module: 'protobuf-java'
+    }
+
+    // Dependencies required for testing the SonarQube API's
+    testImplementation 'org.sonarsource.sonarqube:sonar-plugin-api-impl'
+    testImplementation 'org.sonarsource.api.plugin:sonar-plugin-api-test-fixtures'
+
     // SLang related dependencies
     implementation project(':slang-api')
     implementation project(':slang-checks')
     implementation project(':slang-plugin')
 
-    // SonarQube Connecting API Plugins
-    compileOnly 'org.sonarsource.api.plugin:sonar-plugin-api'
-    implementation 'org.sonarsource.analyzer-commons:sonar-analyzer-commons'
+    // Dependencies required for SLang plugin testing
+    testImplementation project(':slang-testing')
+    testImplementation project(':slang-antlr')
+    testImplementation "org.junit.jupiter:junit-jupiter-api"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
+    testImplementation 'org.assertj:assertj-core'
+    testImplementation 'org.mockito:mockito-core'
+    testImplementation 'io.github.classgraph:classgraph'
 
-    // Source Code to JSON Converting Plugin
-    implementation 'com.eclipsesource.minimal-json:minimal-json'
+    // Ballerina related dependencies
+}
 
-    // CheckStyle Plugin
-    implementation project(':checkstyle-import')
-
-    // Ballerina Related Plugins
+// Configurations for the output jar file when the gradle build is performed
+jar {
+    manifest {
+        def displayVersion = (project.buildNumber == null ? project.version : project.version.substring(0, project.version.lastIndexOf('.')) + " (build ${project.buildNumber})")
+        def buildDate = new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        attributes(
+                'Build-Time': buildDate,
+                'Implementation-Build': 'git rev-parse HEAD'.execute().text.trim(),
+                'Plugin-BuildDate': buildDate,
+                'Plugin-ChildFirstClassLoader': 'false',
+                'Plugin-Class': 'org.wso2.ballerina.plugin.BallerinaPlugin',
+                'Plugin-Description': 'Code Analyzer for Ballerina',
+                'Plugin-Developers': 'WSO2 Team',
+                'Plugin-Display-Version': displayVersion,
+                'Plugin-Key': 'sonarballerina',
+                'Plugin-License': 'GNU LGPL 3',
+                'Plugin-Name': 'Ballerina Code Quality and Security',
+                'Plugin-Organization': 'WSO2',
+                'Plugin-OrganizationUrl': 'https://wso2.com/',
+                'Plugin-SourcesUrl': 'https://ballerina.io/',
+                'Plugin-Version': project.version,
+                'Plugin-RequiredForLanguages': 'ballerina',
+                'Sonar-Version': '6.7',
+                'Version': "${project.version}",
+                'Jre-Min-Version': '11',
+        )
+    }
 }
