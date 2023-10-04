@@ -22,14 +22,14 @@ package org.wso2.ballerina.plugin;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonarsource.analyzer.commons.BuiltInQualityProfileJsonLoader;
 
-public class ScalaProfileDefinition implements BuiltInQualityProfilesDefinition {
+public class BallerinaProfileDefinition implements BuiltInQualityProfilesDefinition {
 
   static final String PATH_TO_JSON = "org/sonar/l10n/ballerina/rules/ballerina/Sonar_way_profile.json";
 
   @Override
   public void define(BuiltInQualityProfilesDefinition.Context context) {
-    NewBuiltInQualityProfile profile = context.createBuiltInQualityProfile(ScalaPlugin.PROFILE_NAME, ScalaPlugin.SCALA_LANGUAGE_KEY);
-    BuiltInQualityProfileJsonLoader.load(profile, ScalaPlugin.SCALA_REPOSITORY_KEY, PATH_TO_JSON);
+    NewBuiltInQualityProfile profile = context.createBuiltInQualityProfile(BallerinaPlugin.PROFILE_NAME, BallerinaPlugin.BALLERINA_LANGUAGE_KEY);
+    BuiltInQualityProfileJsonLoader.load(profile, BallerinaPlugin.BALLERINA_REPOSITORY_KEY, PATH_TO_JSON);
     profile.done();
   }
 

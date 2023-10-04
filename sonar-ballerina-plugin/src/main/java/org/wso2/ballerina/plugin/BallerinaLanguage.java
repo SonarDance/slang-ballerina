@@ -22,20 +22,20 @@ package org.wso2.ballerina.plugin;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.resources.AbstractLanguage;
 
-public class ScalaLanguage extends AbstractLanguage {
+public class BallerinaLanguage extends AbstractLanguage {
 
   private Configuration configuration;
 
-  public ScalaLanguage(Configuration configuration) {
-    super(ScalaPlugin.SCALA_LANGUAGE_KEY, ScalaPlugin.SCALA_LANGUAGE_NAME);
+  public BallerinaLanguage(Configuration configuration) {
+    super(BallerinaPlugin.BALLERINA_LANGUAGE_KEY, BallerinaPlugin.BALLERINA_LANGUAGE_NAME);
     this.configuration = configuration;
   }
 
   @Override
   public String[] getFileSuffixes() {
-    String[] suffixes = configuration.getStringArray(ScalaPlugin.SCALA_FILE_SUFFIXES_KEY);
+    String[] suffixes = configuration.getStringArray(BallerinaPlugin.BALLERINA_FILE_SUFFIXES_KEY);
     if (suffixes.length == 0) {
-      suffixes = ScalaPlugin.SCALA_FILE_SUFFIXES_DEFAULT_VALUE.split(",");
+      suffixes = BallerinaPlugin.BALLERINA_FILE_SUFFIXES_DEFAULT_VALUE.split(",");
     }
     return suffixes;
   }

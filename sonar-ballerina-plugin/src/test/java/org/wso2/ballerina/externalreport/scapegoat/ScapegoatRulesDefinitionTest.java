@@ -36,7 +36,7 @@ class ScapegoatRulesDefinitionTest {
     assertThat(context.repositories()).hasSize(1);
     RulesDefinition.Repository repository = context.repository("external_scapegoat");
     assertThat(repository.name()).isEqualTo("Scapegoat");
-    assertThat(repository.language()).isEqualTo("scala");
+    assertThat(repository.language()).isEqualTo("ballerina");
     assertThat(repository.isExternal()).isTrue();
     assertThat(repository.rules()).hasSize(117);
 

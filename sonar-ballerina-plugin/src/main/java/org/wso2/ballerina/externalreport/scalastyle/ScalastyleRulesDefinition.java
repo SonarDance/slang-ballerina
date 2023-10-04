@@ -20,14 +20,14 @@
 package org.wso2.ballerina.externalreport.scalastyle;
 
 import org.sonarsource.analyzer.commons.ExternalRuleLoader;
-import org.wso2.ballerina.plugin.ScalaPlugin;
+import org.wso2.ballerina.plugin.BallerinaPlugin;
 
 public class ScalastyleRulesDefinition extends ScalastyleFamilyRulesDefinition {
 
   private static final String RULES_JSON = "org/sonar/l10n/ballerina/rules/scalastyle/rules.json";
 
   static final ExternalRuleLoader RULE_LOADER = new ExternalRuleLoader(
-    ScalastyleSensor.LINTER_KEY, ScalastyleSensor.LINTER_NAME, RULES_JSON, ScalaPlugin.SCALA_LANGUAGE_KEY);
+    ScalastyleSensor.LINTER_KEY, ScalastyleSensor.LINTER_NAME, RULES_JSON, BallerinaPlugin.BALLERINA_LANGUAGE_KEY);
 
   public ScalastyleRulesDefinition() {
     super(RULE_LOADER);

@@ -37,10 +37,10 @@ class ScalaRulesDefinitionTest {
   @Test
   void rules() {
     RulesDefinition.Repository repository = getRepositoryForVersion(Version.create(9, 3));
-    System.out.println(repository.rules());
+    System.out.println(repository);
 
     assertThat(repository.name()).isEqualTo("Sonar");
-    assertThat(repository.language()).isEqualTo("scala");
+    assertThat(repository.language()).isEqualTo("ballerina");
 
     RulesDefinition.Rule rule = repository.rule("ParsingError");
     assertThat(rule).isNotNull();
@@ -69,12 +69,12 @@ class ScalaRulesDefinitionTest {
 //  }
 
   private RulesDefinition.Repository getRepositoryForVersion(Version version) {
-    RulesDefinition rulesDefinition = new ScalaRulesDefinition(
+    RulesDefinition rulesDefinition = new BallerinaRulesDefinition(
       SonarRuntimeImpl.forSonarQube(version, SonarQubeSide.SCANNER, SonarEdition.COMMUNITY));
     RulesDefinition.Context context = new RulesDefinition.Context();
     rulesDefinition.define(context);
 
-    return context.repository("scala");
+    return context.repository("ballerina");
   }
 
 }

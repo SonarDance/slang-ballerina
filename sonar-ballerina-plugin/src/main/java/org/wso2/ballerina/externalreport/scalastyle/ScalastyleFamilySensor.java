@@ -36,7 +36,7 @@ import org.sonar.api.batch.sensor.issue.NewExternalIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonarsource.analyzer.commons.ExternalRuleLoader;
-import org.wso2.ballerina.plugin.ScalaPlugin;
+import org.wso2.ballerina.plugin.BallerinaPlugin;
 import org.sonarsource.slang.plugin.AbstractPropertyHandlerSensor;
 
 import static org.sonarsource.slang.utils.LogArg.lazyArg;
@@ -52,7 +52,7 @@ public abstract class ScalastyleFamilySensor extends AbstractPropertyHandlerSens
   public abstract ExternalRuleLoader ruleLoader();
 
   protected ScalastyleFamilySensor(AnalysisWarnings analysisWarnings, String propertyKey, String propertyName, String configurationKey) {
-    super(analysisWarnings, propertyKey, propertyName, configurationKey, ScalaPlugin.SCALA_LANGUAGE_KEY);
+    super(analysisWarnings, propertyKey, propertyName, configurationKey, BallerinaPlugin.BALLERINA_LANGUAGE_KEY);
   }
 
   @Override

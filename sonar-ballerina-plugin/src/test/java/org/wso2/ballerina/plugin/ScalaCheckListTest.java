@@ -21,7 +21,7 @@ package org.wso2.ballerina.plugin;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import org.assertj.core.api.Assertions;
+
 import org.junit.jupiter.api.Test;
 import org.sonarsource.slang.testing.PackageScanner;
 
@@ -42,8 +42,8 @@ class ScalaCheckListTest {
   void scala_specific_checks_are_added_to_check_list() {
     List<String> languageImplementation = PackageScanner.findSlangChecksInPackage(SCALA_CHECKS_PACKAGE);
 
-    List<String> checkListNames = ScalaCheckList.checks().stream().map(Class::getName).collect(Collectors.toList());
-    List<String> scalaSpecificChecks = ScalaCheckList.SCALA_LANGUAGE_SPECIFIC_CHECKS.stream().map(Class::getName).collect(Collectors.toList());
+    List<String> checkListNames = BallerinaCheckList.checks().stream().map(Class::getName).collect(Collectors.toList());
+    List<String> scalaSpecificChecks = BallerinaCheckList.BALLERINA_LANGUAGE_SPECIFIC_CHECKS.stream().map(Class::getName).collect(Collectors.toList());
 
     for (String languageCheck : languageImplementation) {
       assertThat(checkListNames).contains(languageCheck);
@@ -54,16 +54,16 @@ class ScalaCheckListTest {
 
   @Test
   void scala_excluded_not_present() {
-    List<Class<?>> checks = ScalaCheckList.checks();
-    for (Class excluded : ScalaCheckList.SCALA_CHECK_BLACK_LIST) {
+    List<Class<?>> checks = BallerinaCheckList.checks();
+    for (Class excluded : BallerinaCheckList.BALLERINA_CHECK_BLACK_LIST) {
       assertThat(checks).doesNotContain(excluded);
     }
   }
 
   @Test
   void scala_included_are_present() {
-    List<Class<?>> checks = ScalaCheckList.checks();
-    for (Class specificCheck : ScalaCheckList.SCALA_LANGUAGE_SPECIFIC_CHECKS) {
+    List<Class<?>> checks = BallerinaCheckList.checks();
+    for (Class specificCheck : BallerinaCheckList.BALLERINA_LANGUAGE_SPECIFIC_CHECKS) {
       assertThat(checks).contains(specificCheck);
     }
   }

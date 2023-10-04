@@ -31,10 +31,10 @@ class ScalaProfileDefinitionTest {
   @Test
   void profile() {
     BuiltInQualityProfilesDefinition.Context context = new BuiltInQualityProfilesDefinition.Context();
-    new ScalaProfileDefinition().define(context);
-    BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = context.profile("scala", "Sonar way");
+    new BallerinaProfileDefinition().define(context);
+    BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = context.profile("ballerina", "Sonar way");
 
-    assertThat(profile.rules()).extracting("repoKey").containsOnly("scala");
+    assertThat(profile.rules()).extracting("repoKey").containsOnly("ballerina");
     assertThat(profile.rules()).isNotEmpty();
     assertThat(profile.rules()).extracting(BuiltInActiveRule::ruleKey).contains("ParsingError");
   }

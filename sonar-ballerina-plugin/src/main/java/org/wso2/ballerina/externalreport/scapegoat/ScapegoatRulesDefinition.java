@@ -21,14 +21,14 @@ package org.wso2.ballerina.externalreport.scapegoat;
 
 import org.sonarsource.analyzer.commons.ExternalRuleLoader;
 import org.wso2.ballerina.externalreport.scalastyle.ScalastyleFamilyRulesDefinition;
-import org.wso2.ballerina.plugin.ScalaPlugin;
+import org.wso2.ballerina.plugin.BallerinaPlugin;
 
 public class ScapegoatRulesDefinition extends ScalastyleFamilyRulesDefinition {
 
   private static final String RULES_JSON = "org/sonar/l10n/ballerina/rules/scapegoat/rules.json";
 
   static final ExternalRuleLoader RULE_LOADER = new ExternalRuleLoader(
-    ScapegoatSensor.LINTER_KEY, ScapegoatSensor.LINTER_NAME, RULES_JSON, ScalaPlugin.SCALA_LANGUAGE_KEY);
+    ScapegoatSensor.LINTER_KEY, ScapegoatSensor.LINTER_NAME, RULES_JSON, BallerinaPlugin.BALLERINA_LANGUAGE_KEY);
 
   public ScapegoatRulesDefinition() {
     super(RULE_LOADER);

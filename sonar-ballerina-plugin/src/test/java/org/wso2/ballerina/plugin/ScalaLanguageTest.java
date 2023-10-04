@@ -28,19 +28,19 @@ class ScalaLanguageTest {
 
   @Test
   void test_suffixes_default() {
-    ScalaLanguage scalaLanguage = new ScalaLanguage(new MapSettings().asConfig());
-    assertThat(scalaLanguage.getFileSuffixes()).containsExactly(".scala");
+    BallerinaLanguage scalaLanguage = new BallerinaLanguage(new MapSettings().asConfig());
+    assertThat(scalaLanguage.getFileSuffixes()).containsExactly(".bal");
   }
 
   @Test
   void test_suffixes_empty() {
-    ScalaLanguage scalaLanguage = new ScalaLanguage(new MapSettings().setProperty(ScalaPlugin.SCALA_FILE_SUFFIXES_KEY, "").asConfig());
-    assertThat(scalaLanguage.getFileSuffixes()).containsExactly(".scala");
+    BallerinaLanguage scalaLanguage = new BallerinaLanguage(new MapSettings().setProperty(BallerinaPlugin.BALLERINA_FILE_SUFFIXES_KEY, "").asConfig());
+    assertThat(scalaLanguage.getFileSuffixes()).containsExactly(".bal");
   }
 
   @Test
   void test_suffixes_custom() {
-    ScalaLanguage scalaLanguage = new ScalaLanguage(new MapSettings().setProperty(ScalaPlugin.SCALA_FILE_SUFFIXES_KEY, ".custom").asConfig());
+    BallerinaLanguage scalaLanguage = new BallerinaLanguage(new MapSettings().setProperty(BallerinaPlugin.BALLERINA_FILE_SUFFIXES_KEY, ".custom").asConfig());
     assertThat(scalaLanguage.getFileSuffixes()).containsExactly(".custom");
   }
 

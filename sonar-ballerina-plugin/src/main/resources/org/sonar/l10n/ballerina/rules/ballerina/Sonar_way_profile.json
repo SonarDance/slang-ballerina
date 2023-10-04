@@ -1,7 +1,6 @@
 {
   "name": "Sonar way",
   "ruleKeys": [
-    "ParsingError",
-    "BallerinaUnusedVariable"
+    "ParsingError"
   ]
 }

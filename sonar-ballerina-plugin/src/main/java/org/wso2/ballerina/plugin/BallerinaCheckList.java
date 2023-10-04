@@ -52,7 +52,6 @@ import org.sonarsource.slang.checks.MatchWithoutElseCheck;
 import org.sonarsource.slang.checks.NestedMatchCheck;
 import org.sonarsource.slang.checks.OctalValuesCheck;
 import org.sonarsource.slang.checks.OneStatementPerLineCheck;
-import org.sonarsource.slang.checks.ParsingErrorCheck;
 import org.sonarsource.slang.checks.RedundantParenthesesCheck;
 import org.sonarsource.slang.checks.SelfAssignmentCheck;
 import org.sonarsource.slang.checks.StringLiteralDuplicatedCheck;
@@ -76,14 +75,14 @@ import org.wso2.ballerina.checks.AllBranchesIdenticalScalaCheck;
 import org.wso2.ballerina.checks.DuplicateBranchScalaCheck;
 import org.wso2.ballerina.checks.UnusedPrivateMethodScalaCheck;
 
-public final class ScalaCheckList {
+public final class BallerinaCheckList {
 
-  private ScalaCheckList() {
+  private BallerinaCheckList() {
     // utility class
   }
 
   // Add to here all the default rules sonar source SLang provides which should be disabled
-  static final Class[] SCALA_CHECK_BLACK_LIST = {
+  static final Class[] BALLERINA_CHECK_BLACK_LIST = {
     // Intentionally disabling all default checks for starting out with the Ballerina Plugin
     MatchWithoutElseCheck.class,
     OctalValuesCheck.class,
@@ -142,15 +141,15 @@ public final class ScalaCheckList {
   };
 
   // Add to here all the customized rules that are created by extending the sonar source SLang provided rules
-  static final List<Class<?>> SCALA_LANGUAGE_SPECIFIC_CHECKS = Arrays.asList(
+  static final List<Class<?>> BALLERINA_LANGUAGE_SPECIFIC_CHECKS = Arrays.asList(
     UnusedPrivateMethodScalaCheck.class,
     AllBranchesIdenticalScalaCheck.class,
     DuplicateBranchScalaCheck.class);
 
   // Function which decides which rules to include and which rules to exclude
   public static List<Class<?>> checks() {
-    List<Class<?>> list = new ArrayList<>(CheckList.excludeChecks(SCALA_CHECK_BLACK_LIST));
-    list.addAll(SCALA_LANGUAGE_SPECIFIC_CHECKS);
+    List<Class<?>> list = new ArrayList<>(CheckList.excludeChecks(BALLERINA_CHECK_BLACK_LIST));
+    list.addAll(BALLERINA_LANGUAGE_SPECIFIC_CHECKS);
     return list;
   }
 }

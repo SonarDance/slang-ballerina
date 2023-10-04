@@ -29,24 +29,24 @@ import org.sonarsource.slang.checks.CommentedCodeCheck;
 import org.sonarsource.slang.checks.utils.Language;
 import org.sonarsource.slang.plugin.RulesDefinitionUtils;
 
-public class ScalaRulesDefinition implements RulesDefinition {
+public class BallerinaRulesDefinition implements RulesDefinition {
 
   private static final String RESOURCE_FOLDER = "org/sonar/l10n/ballerina/rules/ballerina";
 
   private final SonarRuntime runtime;
 
-  public ScalaRulesDefinition(SonarRuntime runtime) {
+  public BallerinaRulesDefinition(SonarRuntime runtime) {
     this.runtime = runtime;
   }
 
   @Override
   public void define(RulesDefinition.Context context) {
     NewRepository repository = context
-      .createRepository(ScalaPlugin.SCALA_REPOSITORY_KEY, ScalaPlugin.SCALA_LANGUAGE_KEY)
-      .setName(ScalaPlugin.REPOSITORY_NAME);
-    RuleMetadataLoader ruleMetadataLoader = new RuleMetadataLoader(RESOURCE_FOLDER, ScalaProfileDefinition.PATH_TO_JSON, runtime);
+      .createRepository(BallerinaPlugin.BALLERINA_REPOSITORY_KEY, BallerinaPlugin.BALLERINA_LANGUAGE_KEY)
+      .setName(BallerinaPlugin.REPOSITORY_NAME);
+    RuleMetadataLoader ruleMetadataLoader = new RuleMetadataLoader(RESOURCE_FOLDER, BallerinaProfileDefinition.PATH_TO_JSON, runtime);
 
-    List<Class<?>> checks = new ArrayList<>(ScalaCheckList.checks());
+    List<Class<?>> checks = new ArrayList<>(BallerinaCheckList.checks());
     checks.add(CommentedCodeCheck.class);
     ruleMetadataLoader.addRulesByAnnotatedClass(repository, checks);
 

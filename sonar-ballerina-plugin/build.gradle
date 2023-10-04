@@ -2,6 +2,9 @@ plugins {
     // Required plugin for scala projects
     id "scala"
 
+    // Required plugin to integrate the SLang local dependencies to the final jar file
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+
     // Ballerina dependent plugins to be included here
 }
 
@@ -17,6 +20,10 @@ sourceSets {
         }
     }
 }
+
+// Required tasks to interlink the scala AST to SLang AST converters
+tasks.compileScala.classpath = sourceSets.main.compileClasspath
+tasks.compileJava.classpath += files(sourceSets.main.scala.classesDirectory)
 
 sonarqube {
     properties {
@@ -61,10 +68,6 @@ dependencies {
     // Ballerina related dependencies
 }
 
-// Required tasks to interlink the scala AST to SLang AST converters
-tasks.compileScala.classpath = sourceSets.main.compileClasspath
-tasks.compileJava.classpath += files(sourceSets.main.scala.classesDirectory)
-
 // Configurations for the output jar file when the gradle build is performed
 jar {
     manifest {
@@ -91,5 +94,50 @@ jar {
                 'Version': "${project.version}",
                 'Jre-Min-Version': '11',
         )
+    }
+}
+
+// Configuration required to create the shadow jar/ jar file which contains all local plugins bundled
+shadowJar {
+    minimize { }
+
+    // exclude unwanted files from being packed to decrease the jar size
+    // org.scalameta:common_2.12
+    exclude 'org/scalameta/overload/*'
+    // org.scalameta:io_2.12
+    exclude 'scala/meta/internal/io/*'
+    // org.scala-lang:scala-library
+    exclude 'scala/annotation/*'
+    exclude 'scala/collection/parallel/**'
+    exclude 'scala/concurrent/**'
+    exclude 'scala/io/*'
+    exclude 'scala/util/matching/*'
+    //
+    exclude 'com/google/protobuf/**'
+    // scala-build related files, useless for our use
+    exclude '**/*.js'
+    exclude '**/*.properties'
+    exclude '**/*.proto'
+    exclude '**/*.txt'
+
+    // The following command actually creates the final jar file
+    doLast {
+        enforceJarSizeAndCheckContent(shadowJar.archiveFile.get().asFile, 12_500_000L, 13_500_000L)
+    }
+}
+
+artifacts {
+    archives shadowJar
+}
+
+artifactoryPublish.skip = false
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact source: shadowJar, classifier: null
+            artifact sourcesJar
+            artifact javadocJar
+        }
     }
 }

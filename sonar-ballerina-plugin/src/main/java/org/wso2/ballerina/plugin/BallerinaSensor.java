@@ -32,17 +32,18 @@ import org.sonarsource.slang.checks.CommentedCodeCheck;
 import org.sonarsource.slang.checks.api.SlangCheck;
 import org.sonarsource.slang.plugin.SlangSensor;
 
-public class ScalaSensor extends SlangSensor {
+public class BallerinaSensor extends SlangSensor {
 
   private final Checks<SlangCheck> checks;
 
-  public ScalaSensor(SonarRuntime sonarRuntime, CheckFactory checkFactory, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, ScalaLanguage language) {
+  public BallerinaSensor(SonarRuntime sonarRuntime, CheckFactory checkFactory, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, BallerinaLanguage language) {
     super(sonarRuntime, noSonarFilter, fileLinesContextFactory, language);
-    checks = checkFactory.create(ScalaPlugin.SCALA_REPOSITORY_KEY);
-    checks.addAnnotatedChecks((Iterable<?>) ScalaCheckList.checks());
+    checks = checkFactory.create(BallerinaPlugin.BALLERINA_REPOSITORY_KEY);
+    checks.addAnnotatedChecks((Iterable<?>) BallerinaCheckList.checks());
     checks.addAnnotatedChecks(new CommentedCodeCheck(new ScalaCodeVerifier()));
   }
 
+  // Have to implement the Ballerina Converter and then replace the following one with it
   @Override
   protected ASTConverter astConverter(SensorContext sensorContext) {
     return new ScalaConverter();
@@ -55,7 +56,7 @@ public class ScalaSensor extends SlangSensor {
 
   @Override
   protected String repositoryKey() {
-    return ScalaPlugin.SCALA_REPOSITORY_KEY;
+    return BallerinaPlugin.BALLERINA_REPOSITORY_KEY;
   }
 
 }

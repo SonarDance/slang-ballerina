@@ -26,13 +26,11 @@ import org.sonar.api.batch.fs.TextPointer;
 import org.sonar.api.batch.rule.CheckFactory;
 import org.sonar.api.batch.sensor.error.AnalysisError;
 import org.sonar.api.batch.sensor.issue.Issue;
-import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.batch.sensor.issue.internal.DefaultNoSonarFilter;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonarsource.slang.testing.AbstractSensorTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonarsource.slang.testing.TextRangeAssert.assertTextRange;
 
 // This is a direct test done against the plugin implementation, and cannot be deactivated like the SLang tests
 class ScalaSensorTest extends AbstractSensorTest {
@@ -109,16 +107,16 @@ class ScalaSensorTest extends AbstractSensorTest {
 
   @Override
   protected String repositoryKey() {
-    return ScalaPlugin.SCALA_REPOSITORY_KEY;
+    return BallerinaPlugin.BALLERINA_REPOSITORY_KEY;
   }
 
   @Override
-  protected ScalaLanguage language() {
-    return new ScalaLanguage(new MapSettings().asConfig());
+  protected BallerinaLanguage language() {
+    return new BallerinaLanguage(new MapSettings().asConfig());
   }
 
-  private ScalaSensor sensor(CheckFactory checkFactory) {
-    return new ScalaSensor(SQ_LTS_RUNTIME, checkFactory, fileLinesContextFactory, new DefaultNoSonarFilter(), language());
+  private BallerinaSensor sensor(CheckFactory checkFactory) {
+    return new BallerinaSensor(SQ_LTS_RUNTIME, checkFactory, fileLinesContextFactory, new DefaultNoSonarFilter(), language());
   }
 
 }

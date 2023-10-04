@@ -36,7 +36,7 @@ class ScalastyleRulesDefinitionTest {
     assertThat(context.repositories()).hasSize(1);
     RulesDefinition.Repository scalastyleRepository = context.repository("external_scalastyle");
     assertThat(scalastyleRepository.name()).isEqualTo("Scalastyle");
-    assertThat(scalastyleRepository.language()).isEqualTo("scala");
+    assertThat(scalastyleRepository.language()).isEqualTo("ballerina");
     assertThat(scalastyleRepository.isExternal()).isTrue();
     assertThat(scalastyleRepository.rules()).hasSize(72);
 

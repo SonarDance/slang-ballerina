@@ -32,14 +32,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ScalaPluginTest {
 
-  private ScalaPlugin scalaPlugin = new ScalaPlugin();
+  private BallerinaPlugin scalaPlugin = new BallerinaPlugin();
 
   @Test
   void sonarqube_extensions() {
     SonarRuntime runtime = SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
     Plugin.Context context = new Plugin.Context(runtime);
     scalaPlugin.define(context);
-    assertThat(context.getExtensions()).hasSize(13);
+    assertThat(context.getExtensions()).hasSize(5);
   }
 
   @Test

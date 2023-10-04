@@ -67,7 +67,7 @@ public class ScalastyleSensorTest {
     ScalastyleSensor sensor = new ScalastyleSensor(analysisWarnings::add);
     sensor.describe(sensorDescriptor);
     assertThat(sensorDescriptor.name()).isEqualTo("Import of Scalastyle issues");
-    assertThat(sensorDescriptor.languages()).containsExactly("scala");
+    assertThat(sensorDescriptor.languages()).containsExactly("ballerina");
     assertNoErrorWarnDebugLogs(logTester);
   }
 
