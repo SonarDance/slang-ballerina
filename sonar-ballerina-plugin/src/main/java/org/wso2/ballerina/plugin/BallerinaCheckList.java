@@ -153,7 +153,7 @@ public final class BallerinaCheckList {
     List<Class<?>> list = new ArrayList<>(CheckList.excludeChecks(BALLERINA_CHECK_BLACK_LIST));
 
     // Disabling the custom rules addition untill a ballerina specific custom rule is implemented
-    list.addAll(BALLERINA_LANGUAGE_SPECIFIC_CHECKS);
+    // list.addAll(BALLERINA_LANGUAGE_SPECIFIC_CHECKS);
 
     return list;
   }
