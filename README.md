@@ -25,7 +25,35 @@ This Plugin provides Ballerina static code analysis support for SonarQube.
 
 ## Plugin Creation steps
 
-- Plugin creation steps to be added here...
+1. Clone the repository
+
+2. Copy and existing SLang plugin to create the new language support on top of (Scala was chosen)
+
+3. Rename it to Sonar Ballerina Plugin
+
+4. Change the build.gradle file to suite Ballerina
+
+5. Use the Plugin class as a starting point on converting the duplicated plugin to suite Ballerina
+
+```
+📦sonar-ballerina-plugin
+ ┣ 📂bin
+ ┣ 📂build
+ ┣ 📂src
+ ┃ ┣ 📂main
+ ┃ ┃ ┣ 📂java
+ ┃ ┃ ┃ ┗ 📂org
+ ┃ ┃ ┃ ┃ ┗ 📂wso2
+ ┃ ┃ ┃ ┃ ┃ ┗ 📂ballerina
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂checks
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂externalreport
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂plugin
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BallerinaCheckList.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BallerinaLanguage.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ **📜BallerinaPlugin.java**
+```
+
+6. Continue Developing...
 
 ## Resources utilized for testing and creating the plugin
 
