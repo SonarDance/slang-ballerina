@@ -52,6 +52,7 @@ import org.sonarsource.slang.checks.MatchWithoutElseCheck;
 import org.sonarsource.slang.checks.NestedMatchCheck;
 import org.sonarsource.slang.checks.OctalValuesCheck;
 import org.sonarsource.slang.checks.OneStatementPerLineCheck;
+import org.sonarsource.slang.checks.ParsingErrorCheck;
 import org.sonarsource.slang.checks.RedundantParenthesesCheck;
 import org.sonarsource.slang.checks.SelfAssignmentCheck;
 import org.sonarsource.slang.checks.StringLiteralDuplicatedCheck;
@@ -84,60 +85,61 @@ public final class BallerinaCheckList {
   // Add to here all the default rules sonar source SLang provides which should be disabled
   static final Class[] BALLERINA_CHECK_BLACK_LIST = {
     // Intentionally disabling all default checks for starting out with the Ballerina Plugin
-    MatchWithoutElseCheck.class,
-    OctalValuesCheck.class,
-    RedundantParenthesesCheck.class,
-    WrongAssignmentOperatorCheck.class,
-    BadClassNameCheck.class,
-    BadFunctionNameCheck.class,
-    BooleanInversionCheck.class,
-    BooleanLiteralCheck.class,
-    CheckList.class,
-    CodeAfterJumpCheck.class,
-    CollapsibleIfStatementsCheck.class,
-    CommentedCodeCheck.class,
-    DuplicatedFunctionImplementationCheck.class,
-    ElseIfWithoutElseCheck.class,
-    EmptyBlockCheck.class,
-    EmptyCommentCheck.class,
-    EmptyFunctionCheck.class,
-    FileHeaderCheck.class,
-    FixMeCommentCheck.class,
-    FunctionCognitiveComplexityCheck.class,
-    HardcodedCredentialsCheck.class,
-    HardcodedIpCheck.class,
-    IdenticalBinaryOperandCheck.class,
-    IdenticalConditionsCheck.class,
-    IfConditionalAlwaysTrueOrFalseCheck.class,
-    MatchCaseTooBigCheck.class,
-    MatchWithoutElseCheck.class,
-    NestedMatchCheck.class,
-    OctalValuesCheck.class,
-    OneStatementPerLineCheck.class,
-    RedundantParenthesesCheck.class,
-    SelfAssignmentCheck.class,
-    StringLiteralDuplicatedCheck.class,
-    TabsCheck.class,
-    TodoCommentCheck.class,
-    TooComplexExpressionCheck.class,
-    TooDeeplyNestedStatementsCheck.class,
-    TooLongFunctionCheck.class,
-    TooLongLineCheck.class,
-    TooManyCasesCheck.class,
-    TooManyLinesOfCodeFileCheck.class,
-    TooManyParametersCheck.class,
-    UnusedFunctionParameterCheck.class,
-    UnusedLocalVariableCheck.class,
-    VariableAndParameterNameCheck.class,
-    WrongAssignmentOperatorCheck.class,
+          // Language specific implementation is provided.
+          AllBranchesIdenticalCheck.class,
 
-    // The Parsing error check is there in a main test so it should not be excluded
-    // ParsingErrorCheck.class,
+          BadClassNameCheck.class,
+          BadFunctionNameCheck.class,
+          BooleanInversionCheck.class,
+          BooleanLiteralCheck.class,
+          CodeAfterJumpCheck.class,
+          CollapsibleIfStatementsCheck.class,
 
-    // Language specific implementation is provided.
-    UnusedPrivateMethodCheck.class,
-    AllBranchesIdenticalCheck.class,
-    DuplicateBranchCheck.class
+          // Language specific implementation is provided.
+          DuplicateBranchCheck.class,
+
+          DuplicatedFunctionImplementationCheck.class,
+          ElseIfWithoutElseCheck.class,
+          EmptyBlockCheck.class,
+          EmptyCommentCheck.class,
+          EmptyFunctionCheck.class,
+          FileHeaderCheck.class,
+          FixMeCommentCheck.class,
+          FunctionCognitiveComplexityCheck.class,
+          HardcodedCredentialsCheck.class,
+          HardcodedIpCheck.class,
+          IdenticalBinaryOperandCheck.class,
+          IdenticalConditionsCheck.class,
+          IfConditionalAlwaysTrueOrFalseCheck.class,
+          MatchCaseTooBigCheck.class,
+          MatchWithoutElseCheck.class,
+          NestedMatchCheck.class,
+          OctalValuesCheck.class,
+          OneStatementPerLineCheck.class,
+
+          // The Parsing error check is there in a main test so it should not be excluded
+          // ParsingErrorCheck.class,
+
+          RedundantParenthesesCheck.class,
+          SelfAssignmentCheck.class,
+          StringLiteralDuplicatedCheck.class,
+          TabsCheck.class,
+          TodoCommentCheck.class,
+          TooComplexExpressionCheck.class,
+          TooDeeplyNestedStatementsCheck.class,
+          TooLongFunctionCheck.class,
+          TooLongLineCheck.class,
+          TooManyLinesOfCodeFileCheck.class,
+          TooManyCasesCheck.class,
+          TooManyParametersCheck.class,
+          UnusedFunctionParameterCheck.class,
+          UnusedLocalVariableCheck.class,
+
+          // Language specific implementation is provided.
+          UnusedPrivateMethodCheck.class,
+
+          VariableAndParameterNameCheck.class,
+          WrongAssignmentOperatorCheck.class
   };
 
   // Add to here all the customized rules that are created by extending the sonar source SLang provided rules
@@ -149,7 +151,10 @@ public final class BallerinaCheckList {
   // Function which decides which rules to include and which rules to exclude
   public static List<Class<?>> checks() {
     List<Class<?>> list = new ArrayList<>(CheckList.excludeChecks(BALLERINA_CHECK_BLACK_LIST));
+
+    // Disabling the custom rules addition untill a ballerina specific custom rule is implemented
     list.addAll(BALLERINA_LANGUAGE_SPECIFIC_CHECKS);
+
     return list;
   }
 }
