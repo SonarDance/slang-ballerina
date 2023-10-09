@@ -17,26 +17,20 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.wso2.ballerina.externalreport.scapegoat;
+package org.wso2.ballerina.checks;
+import org.sonar.check.Rule;
+import org.sonarsource.slang.api.MatchTree;
+import org.sonarsource.slang.checks.api.InitContext;
+import org.sonarsource.slang.checks.api.SlangCheck;
 
-import org.sonar.api.notifications.AnalysisWarnings;
-import org.sonarsource.analyzer.commons.ExternalRuleLoader;
-import org.wso2.ballerina.externalreport.scalastyle.ScalastyleFamilySensor;
-
-public class ScapegoatSensor extends ScalastyleFamilySensor {
-
-  static final String LINTER_KEY = "scapegoat";
-  static final String LINTER_NAME = "Scapegoat";
-
-  public static final String REPORT_PROPERTY_KEY = "sonar.scala.scapegoat.reportPaths";
-
-  public ScapegoatSensor(AnalysisWarnings analysisWarnings) {
-    super(analysisWarnings, LINTER_KEY, LINTER_NAME, REPORT_PROPERTY_KEY);
-  }
-
-  @Override
-  public ExternalRuleLoader ruleLoader() {
-    return ScapegoatRulesDefinition.RULE_LOADER;
-  }
-
+@Rule(key = "BallerinaCustomCheck")
+public class BallerinaCustomCheck implements SlangCheck {
+    @Override
+    public void initialize(InitContext init) {
+        // The MatchTree here is utilized as a placeholder to achieve a check
+        // The -> represents an anonymous function call [i.e: () =>{} in JS]
+        init.register(MatchTree.class, (ctx, tree) ->{
+            ctx.reportFileIssue("This is a Ballerina Custom Check issue =)");
+        });
+    }
 }

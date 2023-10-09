@@ -73,6 +73,7 @@ import org.sonarsource.slang.checks.WrongAssignmentOperatorCheck;
 
 // Ballerina Custom checks
 import org.wso2.ballerina.checks.AllBranchesIdenticalScalaCheck;
+import org.wso2.ballerina.checks.BallerinaCustomCheck;
 import org.wso2.ballerina.checks.DuplicateBranchScalaCheck;
 import org.wso2.ballerina.checks.UnusedPrivateMethodScalaCheck;
 
@@ -144,16 +145,19 @@ public final class BallerinaCheckList {
 
   // Add to here all the customized rules that are created by extending the sonar source SLang provided rules
   static final List<Class<?>> BALLERINA_LANGUAGE_SPECIFIC_CHECKS = Arrays.asList(
-    UnusedPrivateMethodScalaCheck.class,
-    AllBranchesIdenticalScalaCheck.class,
-    DuplicateBranchScalaCheck.class);
+    // UnusedPrivateMethodScalaCheck.class,
+    // AllBranchesIdenticalScalaCheck.class,
+    // DuplicateBranchScalaCheck.class
+    // Ballerina Language Specific Implementation
+    BallerinaCustomCheck.class
+  );
 
   // Function which decides which rules to include and which rules to exclude
   public static List<Class<?>> checks() {
     List<Class<?>> list = new ArrayList<>(CheckList.excludeChecks(BALLERINA_CHECK_BLACK_LIST));
 
     // Disabling the custom rules addition untill a ballerina specific custom rule is implemented
-    // list.addAll(BALLERINA_LANGUAGE_SPECIFIC_CHECKS);
+     list.addAll(BALLERINA_LANGUAGE_SPECIFIC_CHECKS);
 
     return list;
   }

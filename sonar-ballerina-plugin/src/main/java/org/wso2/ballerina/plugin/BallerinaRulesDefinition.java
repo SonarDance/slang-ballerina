@@ -50,7 +50,7 @@ public class BallerinaRulesDefinition implements RulesDefinition {
     checks.add(CommentedCodeCheck.class);
     ruleMetadataLoader.addRulesByAnnotatedClass(repository, checks);
 
-    RulesDefinitionUtils.setDefaultValuesForParameters(repository, checks, Language.SCALA);
+    RulesDefinitionUtils.setDefaultValuesForParameters(repository, checks, Language.BALLERINA);
 
     repository.done();
   }

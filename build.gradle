@@ -264,6 +264,9 @@ artifactory {
     clientConfig.info.addEnvironmentProperty('PROJECT_VERSION', "${version}")
 }
 
+// This function determines the size of the shadow jar file
+// if the size is smaller than the one defined in the main build.gradle file
+// the build creation will fail
 void enforceJarSizeAndCheckContent(File file, long minSize, long maxSize) {
     long size = file.length()
     if (size < minSize)  {

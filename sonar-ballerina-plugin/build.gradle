@@ -132,17 +132,18 @@ shadowJar {
     exclude 'scala/concurrent/**'
     exclude 'scala/io/*'
     exclude 'scala/util/matching/*'
-    //
     exclude 'com/google/protobuf/**'
+
     // scala-build related files, useless for our use
     exclude '**/*.js'
     exclude '**/*.properties'
     exclude '**/*.proto'
     exclude '**/*.txt'
 
-    // The following command actually creates the final jar file
+    // The following command actually creates the final jar file if the build is between the size ranges given
+    // enforceJarSizeAndCheckContent(shadowJar.archiveFile.get().asFile, MINSIZE, MAXSIZE)
     doLast {
-        enforceJarSizeAndCheckContent(shadowJar.archiveFile.get().asFile, 12_500_000L, 13_500_000L)
+        enforceJarSizeAndCheckContent(shadowJar.archiveFile.get().asFile, 12_000_000L, 13_500_000L)
     }
 }
 

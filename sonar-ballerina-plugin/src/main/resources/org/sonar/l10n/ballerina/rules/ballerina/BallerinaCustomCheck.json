@@ -1,5 +1,5 @@
 {
-  "title": "Local variable and function parameter names should comply with a naming convention",
+  "title": "Custom Ballerina Check =)",
   "type": "CODE_SMELL",
   "code": {
     "impacts": {
@@ -10,14 +10,14 @@
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
-    "constantCost": "2min"
+    "constantCost": "5min"
   },
   "tags": [
     "convention"
   ],
   "defaultSeverity": "Minor",
-  "ruleSpecification": "RSPEC-117",
-  "sqKey": "S117",
+  "ruleSpecification": "RFC-3629",
+  "sqKey": "BallerinaCustomCheck",
   "scope": "All",
   "quickfix": "unknown"
 }
