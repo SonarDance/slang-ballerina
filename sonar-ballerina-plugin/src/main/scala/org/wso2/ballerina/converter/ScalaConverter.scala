@@ -74,7 +74,7 @@ class ScalaConverter extends ASTConverter {
       }
   }
 
-
+// Entry point of the converter (The final goal is to convert the Ballerina Syntax Tree to SLang Abstract Syntax Tree)
   override def parse(code: String, @Nullable fileName: String): slang.api.Tree = {
 
     scala.meta.internal.tokenizers.PlatformTokenizerCache.megaCache.clear()
@@ -88,12 +88,14 @@ class ScalaConverter extends ASTConverter {
         // Parsing of Scala "scripts"
         ("Sbt1", () => dialects.Sbt1(code).parse[Source]))
 
+      // Place which creates the Scala Syntax Tree
       val metaTree: scala.meta.Tree = loopOnParsers(parsers) match {
         case Left(tree) => tree
         case Right((msgs, pos)) =>
           throw new slang.api.ParseException(msgs.mkString("\n"), pos)
       }
 
+      // Place which converts Scala tokens to SLang tokens
       val allTokens = metaTree.tokens
         .filter(t => t.isNot[Comment])
         .filter(t => t.pos.start < t.pos.end && t.isNot[Space] && t.isNot[Tab] && t.isNot[CR] && t.isNot[LF])
@@ -101,12 +103,16 @@ class ScalaConverter extends ASTConverter {
         .asInstanceOf[IndexedSeq[Token]]
         .asJava
 
+      // Place which converts Scala Comments to SLang comments
       val allComments = metaTree.tokens
         .filter(t => t.is[Comment])
         .map(t => createComment(t))
         .asJava
 
+      // Place which aggregate SLang comments and tokens to SLang metadata
       val metaDataProvider = new TreeMetaDataProvider(allComments, allTokens, collectAnnotations(metaTree).asJava)
+
+      // Place where it outputs a SLang Abstract Syntax Tree
       new TreeConversion(metaDataProvider).convert(metaTree)
     } catch {
       case e: org.scalameta.UnreachableError => throw new slang.api.ParseException("Unable to parse file content.", null, e)
@@ -129,7 +135,10 @@ class ScalaConverter extends ASTConverter {
   }
 
   private class TreeConversion(metaDataProvider: TreeMetaDataProvider) {
+    // metaTree - Scala Syntax Tree
+    // metaDataProvider - SLang tokens and comments aggregated entity
 
+    // Following function returns a SLang Abstract Syntax Tree
     def convert(metaTree: scala.meta.Tree): slang.api.Tree = {
       metaTree match {
         case implicitTree: Mod.Implicit => return convertModImplicit(implicitTree)
@@ -138,7 +147,10 @@ class ScalaConverter extends ASTConverter {
       if (metaTree.pos.start == metaTree.pos.end && metaTree.isNot[scala.meta.Source]) {
         return null
       }
+
+      // Following variable gets SLang metadata by comparing Scala Syntax Tree with the SLang metaDataProvider
       val metaData = treeMetaData(metaTree)
+
       metaTree match {
         case scala.meta.Source(stats) =>
           createTopLevelTree(metaData, stats)
@@ -160,8 +172,11 @@ class ScalaConverter extends ASTConverter {
           new IdentifierTreeImpl(metaData, value)
         case Type.Name(value) =>
           new IdentifierTreeImpl(metaData, value)
+
+        // Consider the function declaration tree conversion
         case defn: Defn.Def =>
           createFunctionDeclarationTree(metaData, defn)
+
         case ctor: Ctor.Primary =>
           createPrimaryConstructorDeclaration(metaData, ctor)
         case ctor: Ctor.Secondary =>
